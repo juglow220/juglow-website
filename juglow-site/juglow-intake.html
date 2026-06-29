@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juglow — Client Intake Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dusty-rose: #C9A5A5;
+    --mauve: #B88B8B;
+    --taupe: #A67C7C;
+    --mushroom: #8B7373;
+    --ivory: #FFF8F0;
+    --warm-white: #FAF7F2;
+    --soft-brown: #6B5B5B;
+    --dark: #3D2C2C;
+    --sand: rgba(201,165,165,0.25);
+    --sand-border: rgba(201,165,165,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ivory);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cg fill='none' stroke='%23C9A5A5' stroke-width='0.8' opacity='0.08'%3E%3Ccircle cx='50' cy='50' r='15'/%3E%3Ccircle cx='50' cy='35' r='8'/%3E%3Ccircle cx='65' cy='50' r='8'/%3E%3Ccircle cx='50' cy='65' r='8'/%3E%3Ccircle cx='35' cy='50' r='8'/%3E%3Ccircle cx='60' cy='40' r='8'/%3E%3Ccircle cx='60' cy='60' r='8'/%3E%3Ccircle cx='40' cy='60' r='8'/%3E%3Ccircle cx='40' cy='40' r='8'/%3E%3Ccircle cx='150' cy='150' r='10'/%3E%3Ccircle cx='150' cy='140' r='5'/%3E%3Ccircle cx='160' cy='150' r='5'/%3E%3Ccircle cx='150' cy='160' r='5'/%3E%3Ccircle cx='140' cy='150' r='5'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--soft-brown);
+    min-height: 100vh;
+  }
+
+  .site-header {
+    background: linear-gradient(135deg, var(--dusty-rose), var(--mauve));
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(184,139,139,0.2);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    color: var(--ivory);
+    text-transform: uppercase;
+  }
+
+  .header-tagline {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(255,248,240,0.75);
+    text-transform: uppercase;
+  }
+
+  .main { max-width: 760px; margin: 0 auto; padding: 50px 24px 80px; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .form-header { margin-bottom: 36px; }
+
+  .form-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    margin-bottom: 10px;
+  }
+
+  .form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--soft-brown);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+
+  .form-desc { font-size: 14px; color: var(--mushroom); line-height: 1.75; max-width: 520px; }
+
+  .divider {
+    width: 48px; height: 1px;
+    background: linear-gradient(90deg, var(--dusty-rose), var(--mauve));
+    margin: 18px 0 30px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--sand-border);
+    margin-top: 32px;
+  }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .field-row.single { grid-template-columns: 1fr; }
+  .field-row.triple { grid-template-columns: 1fr 1fr 1fr; }
+  .field { display: flex; flex-direction: column; gap: 7px; }
+
+  label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    font-weight: 500;
+  }
+
+  input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+    background: var(--warm-white);
+    border: 1px solid rgba(201,165,165,0.3);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--soft-brown);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
+    width: 100%;
+    appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(166,124,124,0.45); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--dusty-rose);
+    box-shadow: 0 0 0 3px rgba(201,165,165,0.15);
+  }
+
+  textarea { resize: vertical; min-height: 88px; line-height: 1.6; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A67C7C' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+
+  .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .checkbox-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px;
+    background: var(--warm-white);
+    border: 1px solid rgba(201,165,165,0.25);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .check-item:hover { border-color: var(--dusty-rose); background: rgba(201,165,165,0.06); }
+  .check-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--mauve); cursor: pointer; flex-shrink: 0; }
+  .check-item span { font-size: 13px; color: var(--soft-brown); line-height: 1.3; }
+
+  .radio-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+
+  .radio-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px;
+    background: var(--warm-white);
+    border: 1px solid rgba(201,165,165,0.25);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--soft-brown);
+    transition: all 0.15s;
+  }
+
+  .radio-item:hover { border-color: var(--dusty-rose); }
+  .radio-item input { accent-color: var(--mauve); }
+
+  .submit-area { margin-top: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+  .btn-submit {
+    background: linear-gradient(135deg, var(--dusty-rose), var(--mauve));
+    color: var(--ivory); border: none;
+    padding: 16px 44px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 24px rgba(184,139,139,0.3);
+  }
+
+  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 12px 30px rgba(184,139,139,0.4); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .submit-note { font-size: 12px; color: var(--dusty-rose); line-height: 1.6; opacity: 0.8; }
+
+  .success-msg { text-align: center; padding: 70px 40px; animation: fadeIn 0.4s ease; }
+
+  .success-icon {
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--dusty-rose), var(--mauve));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 26px; color: var(--ivory);
+  }
+
+  .success-msg h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: var(--soft-brown); margin-bottom: 10px; }
+  .success-msg p { font-size: 14px; color: var(--mushroom); line-height: 1.7; }
+
+  .error-msg {
+    background: rgba(201,100,100,0.1);
+    border: 1px solid rgba(201,100,100,0.3);
+    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #8B3333;
+    margin-top: 16px;
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 20px; }
+    .main { padding: 28px 16px 60px; }
+    .field-row, .field-row.triple { grid-template-columns: 1fr; }
+    .form-title { font-size: 30px; }
+    .checkbox-grid, .checkbox-grid.three-col { grid-template-columns: 1fr 1fr; }
+    .radio-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">Juglow</div>
+  <div class="header-tagline">Client Intake Form</div>
+</header>
+
+<div class="main" id="form-container">
+  <div class="form-header">
+    <div class="form-eyebrow">New Client</div>
+    <h1 class="form-title">Client Intake Form</h1>
+    <p class="form-desc">Welcome to Juglow. Please complete this form before your first appointment so we can provide you with the best possible care.</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="section-label">Personal Information</div>
+  <div class="field-row">
+    <div class="field"><label>First Name *</label><input type="text" id="firstName" placeholder="Jane"></div>
+    <div class="field"><label>Last Name *</label><input type="text" id="lastName" placeholder="Doe"></div>
+  </div>
+  <div class="field-row">
+    <div class="field"><label>Date of Birth *</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+        <select id="dob-month"><option value="">Month</option><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select><select id="dob-day"><option value="">Day</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select><select id="dob-year"><option value="">Year</option><option>2025</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option><option>2011</option><option>2010</option><option>2009</option><option>2008</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option><option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option><option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option><option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option><option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option><option>1965</option><option>1964</option><option>1963</option><option>1962</option><option>1961</option><option>1960</option><option>1959</option><option>1958</option><option>1957</option><option>1956</option><option>1955</option><option>1954</option><option>1953</option><option>1952</option><option>1951</option><option>1950</option><option>1949</option><option>1948</option><option>1947</option><option>1946</option><option>1945</option><option>1944</option><option>1943</option><option>1942</option><option>1941</option><option>1940</option><option>1939</option><option>1938</option><option>1937</option><option>1936</option><option>1935</option><option>1934</option><option>1933</option><option>1932</option><option>1931</option><option>1930</option><option>1929</option><option>1928</option><option>1927</option><option>1926</option><option>1925</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Phone Number *</label><input type="tel" id="phone" placeholder="(203) 555-0100"></div>
+  </div>
+  <div class="field-row single">
+    <div class="field"><label>Email Address *</label><input type="email" id="email" placeholder="jane@email.com"></div>
+  </div>
+  <div class="field-row single">
+    <div class="field"><label>How did you hear about Juglow?</label>
+      <select id="referral">
+        <option value="">Select one...</option>
+        <option>Instagram</option><option>TikTok</option><option>Google Search</option>
+        <option>Friend / Referral</option><option>Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-label">Skin & Health History</div>
+  <div class="field-row single">
+    <div class="field"><label>Skin type</label>
+      <select id="skinType">
+        <option value="">Select one...</option>
+        <option>Normal</option><option>Dry</option><option>Oily</option>
+        <option>Combination</option><option>Sensitive</option><option>Unsure</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <label style="margin-bottom:10px;display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);font-weight:500;">Primary skin concerns (select all that apply)</label>
+    <div class="checkbox-grid three-col">
+      <label class="check-item"><input type="checkbox" class="concern" value="Acne / Breakouts"><span>Acne / Breakouts</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Hyperpigmentation"><span>Hyperpigmentation</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Fine Lines / Aging"><span>Fine Lines / Aging</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Dryness / Dehydration"><span>Dryness / Dehydration</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Redness / Rosacea"><span>Redness / Rosacea</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Uneven Texture"><span>Uneven Texture</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Large Pores"><span>Large Pores</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Dark Circles"><span>Dark Circles</span></label>
+      <label class="check-item"><input type="checkbox" class="concern" value="Other"><span>Other</span></label>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <label style="margin-bottom:10px;display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);font-weight:500;">Currently using any of the following?</label>
+    <div class="checkbox-grid">
+      <label class="check-item"><input type="checkbox" class="currentuse" value="Retinol / Retinoids"><span>Retinol / Retinoids</span></label>
+      <label class="check-item"><input type="checkbox" class="currentuse" value="Prescription Topicals"><span>Prescription Topicals</span></label>
+      <label class="check-item"><input type="checkbox" class="currentuse" value="Accutane (within last year)"><span>Accutane (within last year)</span></label>
+      <label class="check-item"><input type="checkbox" class="currentuse" value="AHA / BHA Exfoliants"><span>AHA / BHA Exfoliants</span></label>
+      <label class="check-item"><input type="checkbox" class="currentuse" value="Vitamin C Serum"><span>Vitamin C Serum</span></label>
+      <label class="check-item"><input type="checkbox" class="currentuse" value="None of the above"><span>None of the above</span></label>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <div class="field"><label>Known allergies? (skincare, latex, nuts, etc.)</label>
+      <textarea id="allergies" placeholder="List any known allergies..."></textarea>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <label style="margin-bottom:10px;display:block;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--taupe);font-weight:500;">Had any of the following in the past 2 weeks?</label>
+    <div class="checkbox-grid">
+      <label class="check-item"><input type="checkbox" class="recent" value="Botox / Fillers"><span>Botox / Fillers</span></label>
+      <label class="check-item"><input type="checkbox" class="recent" value="Laser Treatment"><span>Laser Treatment</span></label>
+      <label class="check-item"><input type="checkbox" class="recent" value="Sun Exposure / Sunburn"><span>Sun Exposure / Sunburn</span></label>
+      <label class="check-item"><input type="checkbox" class="recent" value="Active Cold Sore / Rash"><span>Active Cold Sore / Rash</span></label>
+      <label class="check-item"><input type="checkbox" class="recent" value="None of the above"><span>None of the above</span></label>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <div class="field"><label>Are you pregnant or nursing?</label>
+      <div class="radio-row">
+        <label class="radio-item"><input type="radio" name="pregnant" value="Yes"> Yes</label>
+        <label class="radio-item"><input type="radio" name="pregnant" value="No"> No</label>
+        <label class="radio-item"><input type="radio" name="pregnant" value="Prefer not to say"> Prefer not to say</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row single">
+    <div class="field"><label>Anything else we should know?</label>
+      <textarea id="notes" placeholder="Additional notes, concerns, or special requests..."></textarea>
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" id="submitBtn" onclick="submitIntake()">Submit Intake Form</button>
+    <span class="submit-note">Your information is kept private<br>and never shared with third parties.</span>
+  </div>
+  <div class="error-msg" id="errorMsg">Something went wrong. Please try again or contact Juglow directly.</div>
+</div>
+
+<script>
+  async function submitIntake() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!firstName || !lastName || !email || !phone) {
+      document.getElementById('errorMsg').style.display = 'block';
+      document.getElementById('errorMsg').textContent = 'Please fill in all required fields (First Name, Last Name, Email, Phone).';
+      return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    const getChecked = (cls) => [...document.querySelectorAll(`.${cls}:checked`)].map(el => el.value).join(', ') || 'None selected';
+    const getRadio = (name) => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : 'Not answered'; };
+
+    const payload = {
+      accessKey: "sf_38f165305e02a9d8528067cb",
+      subject: `New Client Intake — ${firstName} ${lastName}`,
+      email: email,
+      "Form Type": "Client Intake",
+      "Client Name": `${firstName} ${lastName}`,
+      "Date of Birth": [document.getElementById('dob-month').value, document.getElementById('dob-day').value, document.getElementById('dob-year').value].filter(Boolean).join(' ') || 'Not provided',
+      "Phone": phone,
+      "Email": email,
+      "How They Heard About Juglow": document.getElementById('referral').value || 'Not provided',
+      "Skin Type": document.getElementById('skinType').value || 'Not provided',
+      "Skin Concerns": getChecked('concern'),
+      "Current Products / Treatments": getChecked('currentuse'),
+      "Known Allergies": document.getElementById('allergies').value || 'None',
+      "Recent Treatments (Past 2 Weeks)": getChecked('recent'),
+      "Pregnant or Nursing": getRadio('pregnant'),
+      "Additional Notes": document.getElementById('notes').value || 'None'
+    };
+
+    try {
+      const res = await fetch('https://api.staticforms.xyz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        document.getElementById('form-container').innerHTML = `
+          <div class="success-msg">
+            <div class="success-icon">✓</div>
+            <h3>Thank You, ${firstName}</h3>
+            <p>Your intake form has been submitted successfully.<br>We look forward to seeing you at Juglow.</p>
+          </div>`;
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (e) {
+      btn.disabled = false;
+      btn.textContent = 'Submit Intake Form';
+      document.getElementById('errorMsg').style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
