@@ -1,6 +1,11 @@
 [build]
   functions = "netlify/functions"
 
+[[redirects]]
+  from = "/api/square"
+  to = "/.netlify/functions/square"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
